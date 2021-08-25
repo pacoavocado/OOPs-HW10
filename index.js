@@ -14,14 +14,14 @@ const promptUser = () => {
     },
     {
       type: 'list',
-      message: 'What position do they fulfill?',
+      message: 'what position do they fulfill?',
       choices: ["Team Lead", "Engineer", "Junior Engineer", "Intern"],
       name: 'position',
       validate: (value)=>{if(value){return true} else {return 'please pick one'}}
     },
     {
       type: 'input',
-      message: 'What is their ID?',
+      message: 'what is their ID?',
       name: 'id',
     },
     {
@@ -61,8 +61,8 @@ const generateHTML = (answers) =>
       <main class="d-flex flex-wrap justify-content-around px-1">      
          
           <div class="card mb-3" style="max-width: 18rem;">
-              <h5 class="card-title card-header bg-info text-lg-left">${answers.name}</h5>
-              <h5 class="card-title card-header bg-info text-lg-left">${answers.position}</h5>
+              <h5 class="card-title card-header bg-info text-lg-left text-white">${answers.name}</h5>
+              <h5 class="card-title card-header bg-info text-lg-left text-white">${answers.position}</h5>
               <div class="card-body">
               <ul class="list-group list-group-flush">
                   <li class="list-group-item">ID: ${answers.id}</li>
