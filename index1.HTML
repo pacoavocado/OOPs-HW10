@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEAMWORK?</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <header>
+     <h1 class="text-center bg-danger text-white">My Team</h1>   
+    </header>
+    <main class="d-flex flex-wrap justify-content-around px-1">      
+       
+        <div class="card mb-3" style="max-width: 18rem;">
+            <h5 class="card-title card-header bg-info text-lg-left">${answers.name}</h5>
+            <h5 class="card-title card-header bg-info text-lg-left">${answers.position}</h5>
+            <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID: ${answers.id}</li>
+                <li class="list-group-item">Email: ${answers.email}</li>
+                <li class="list-group-item">GitHub: ${answers.gitname}</li>
+            </ul>        
+            </div>
+        </div>
+       
+    </main>  
+</body>
+</html>
