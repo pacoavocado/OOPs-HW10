@@ -11,13 +11,13 @@ const promptUser = () => {
       type: 'input',
       message: 'enter a team member?',
       name: 'name',
+      validate: (value)=>{if(value){return true} else {return 'ENTER A NAME OR DIE'}}
     },
     {
       type: 'list',
       message: 'what position do they fulfill?',
-      choices: ["Team Lead", "Engineer", "Junior Engineer", "Intern"],
+      choices: ["Manager", "Engineer", "Employee", "Intern"],
       name: 'position',
-      validate: (value)=>{if(value){return true} else {return 'please pick one'}}
     },
     {
       type: 'input',
@@ -65,9 +65,9 @@ const generateHTML = (answers) =>
               <h5 class="card-title card-header bg-info text-lg-left text-white">${answers.position}</h5>
               <div class="card-body">
               <ul class="list-group list-group-flush">
-                  <li class="list-group-item">ID: ${answers.id}</li>
-                  <li class="list-group-item">Email: ${answers.email}</li>
-                  <li class="list-group-item">GitHub: ${answers.gitname}</li>
+                  <a class="list-group-item">ID: ${answers.id}</a>
+                  <a class="list-group-item" id="emailAddress" type="email" href="mailto:${answers.email}?subject=From%20Da%20Team!">Email: ${answers.email}</a>
+                  <a class="list-group-item" href="https://github.com/${answers.gitname}" target="blank">GitHub: ${answers.gitname}</a>
               </ul>        
               </div>
           </div>
@@ -79,8 +79,8 @@ const generateHTML = (answers) =>
 // Bonus using writeFileAsync as a promise
 const init = () => {
   promptUser()
-    .then((answers) => writeFileAsync('index.html', generateHTML(answers)))
-    .then(() => console.log('Successfully wrote to index.html'))
+    .then((answers) => writeFileAsync('index.HTML', generateHTML(answers)))
+    .then(() => console.log('Successfully wrote to index.HTML'))
     .catch((err) => console.error(err));
 };
 
