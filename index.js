@@ -11,7 +11,6 @@ const promptUser = () => {
       type: 'input',
       message: 'enter a team member?',
       name: 'name',
-      validate: (value)=>{if(value){return true} else {return 'ENTER A NAME OR DIE'}}
     },
     {
       type: 'list',
