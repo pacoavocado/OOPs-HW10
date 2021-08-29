@@ -15,7 +15,7 @@ const promptUser = () => {
     {
       type: 'list',
       message: 'what position do they fulfill?',
-      choices: ["Manager", "Engineer", "Employee", "Intern"],
+      choices: ["Engineer", "Intern"],
       name: 'position',
     },
     {
