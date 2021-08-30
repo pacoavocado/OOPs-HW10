@@ -93,7 +93,12 @@ const init = () => {
       if (answers.position === "Manager") {
         employees.push(new Manager(answers.name, answers.id, answers.email, answers.officeNumber))
       }
-      
+      if (answers.position === "Engineer") {
+        employees.push(new Engineer(answers.name, answers.id, answers.email, answers.gitname))
+      }
+      if (answers.position === "Intern") {
+        employees.push(new Intern(answers.name, answers.id, answers.email, answers.school))
+      }
       if (answers.done === "no") {
         writeFileAsync('./output/index.HTML', generateHTML(answers))
       }
