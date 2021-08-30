@@ -1,7 +1,11 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const util = require('util');
-
+const Employee = require('./lib/employee.js')
+const Engineer = require("./lib/engineer");
+const Intern = require("./lib/intern");
+const Manager = require("./lib/manager");
+const { prototype } = require('./lib/employee.js');
 // create writeFile function using promises instead of a callback function
 const writeFileAsync = util.promisify(fs.writeFile);
 
@@ -15,7 +19,7 @@ const promptUser = () => {
     {
       type: 'list',
       message: 'what position do they fulfill?',
-      choices: ["Engineer", "Intern"],
+      choices: ["Manager", "Engineer", "Intern"],
       name: 'position',
     },
     {
@@ -39,6 +43,12 @@ const promptUser = () => {
       message: 'what school are they enrolled in',
       name: 'school',
       when: (answers) => answers.position === 'Intern'
+    },
+    {
+      type: 'list',
+      message: 'do you want to add another member',
+      choices: ['yes', 'no'],
+      name: "done"
     },
   ]);
 };
@@ -75,10 +85,23 @@ const generateHTML = (answers) =>
   </body>
   </html>`;
 
+const employees = [];
 // Bonus using writeFileAsync as a promise
 const init = () => {
   promptUser()
-    .then((answers) => writeFileAsync('./output/index.HTML', generateHTML(answers)))
+    .then((answers) => {
+      if (answers.position === "Manager") {
+        employees.push(new Manager(answers.name, answers.id, answers.email, answers.officeNumber))
+      }
+      
+      if (answers.done === "no") {
+        writeFileAsync('./output/index.HTML', generateHTML(answers))
+      }
+      else {
+        promptUser()
+      }
+    })
+
     .then(() => console.log('Successfully wrote to index.HTML'))
     .catch((err) => console.error(err));
 };
