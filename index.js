@@ -36,7 +36,7 @@ const promptUser = () => {
       type: "input",
       message: "enter their GitHub Username",
       name: "gitname",
-      when: (answers) => answers.position !== "Intern",
+      when: (answers) => answers.position === "Mannager" || "Engineer",
     },
     {
       type: "input",
@@ -67,11 +67,16 @@ const generateHTML = () =>
       <header>
        <h1 class="text-center bg-danger text-white">My Team</h1>   
       </header>
-      <main class="d-flex flex-wrap justify-content-around px-1">      
-         
+      <main class="d-flex flex-wrap row justify-content-around px-1">      
+         <section>
         ${generateManagerCard()}
+        </section>
+        <section>
         ${generateEngineerCard()}
+        </section>
+        <section>
         ${generateInternCard()}
+        </section>
          
       </main>  
   </body>
@@ -91,26 +96,18 @@ const init = () => {
             answers.name,
             answers.id,
             answers.email,
-            answers.officeNumber
+            answers.gitname
           )
         );
       }
       if (answers.position === "Engineer") {
         engineerArray.push(
-          new Engineer(
-            answers.name, 
-            answers.id, 
-            answers.email, 
-            answers.gitname)
+          new Engineer(answers.name, answers.id, answers.email, answers.gitname)
         );
       }
       if (answers.position === "Intern") {
         internArray.push(
-          new Intern(
-            answers.name, 
-            answers.id, 
-            answers.email, 
-            answers.school)
+          new Intern(answers.name, answers.id, answers.email, answers.school)
         );
       }
       if (answers.done === "no") {
@@ -128,16 +125,16 @@ function generateManagerCard() {
   let managerCard = "";
   for (let i = 0; i < managerArray.length; i++) {
     const element = managerArray[i];
-    managerCard = `<div class="card mb-3" style="max-width: 18rem;">
+    managerCard = `<section><div class="card mb-3" style="max-width: 18rem;">
     <h5 class="card-title card-header bg-info text-lg-left text-white">${element.name}</h5>
     <h5 class="card-title card-header bg-info text-lg-left text-white">${element.position}</h5>
     <div class="card-body">
     <ul class="list-group list-group-flush">
     <a class="list-group-item">ID: ${element.id}</a>
     <a class="list-group-item" id="emailAddress" type="email" href="mailto:${element.email}?subject=From%20Da%20Team!">Email: ${element.email}</a>
-    <a class="list-group-item" href="https://github.com/${element.gitname}" target="blank">GitHub: ${element.gitname}</a>
+    <a class="list-group-item" target="blank">GitHub: ${element.gitname}</a>
     </ul>        
-    </div>`;
+    </div></section>`;
   }
   return managerCard;
 }
@@ -146,41 +143,37 @@ function generateEngineerCard() {
   let engineerCard = "";
   for (let i = 0; i < engineerArray.length; i++) {
     const element = engineerArray[i];
-    engineerCard += `<div class="card mb-3" style="max-width: 18rem;">
+    engineerCard += `<section><div class="card mb-3" style="max-width: 18rem;">
     <h5 class="card-title card-header bg-info text-lg-left text-white">${element.name}</h5>
     <h5 class="card-title card-header bg-info text-lg-left text-white">${element.position}</h5>
     <div class="card-body">
     <ul class="list-group list-group-flush">
     <a class="list-group-item">ID: ${element.id}</a>
     <a class="list-group-item" id="emailAddress" type="email" href="mailto:${element.email}?subject=From%20Da%20Team!">Email: ${element.email}</a>
-    <a class="list-group-item" href="https://github.com/${element.gitname}" target="blank">GitHub: ${element.gitname}</a>
+    <a class="list-group-item" target="blank">GitHub: ${element.gitname}</a>
     </ul>        
-    </div>`;
+    </div></section>`;
   }
-  return engineerCard
+  return engineerCard;
 }
 
 function generateInternCard() {
   let internCard = "";
   for (let i = 0; i < internArray.length; i++) {
     const element = internArray[i];
-    internCard += `<div class="card mb-3" style="max-width: 18rem;">
+    internCard += `<section><div class="card mb-3" style="max-width: 18rem;">
     <h5 class="card-title card-header bg-info text-lg-left text-white">${element.name}</h5>
     <h5 class="card-title card-header bg-info text-lg-left text-white">${element.position}</h5>
     <div class="card-body">
     <ul class="list-group list-group-flush">
     <a class="list-group-item">ID: ${element.id}</a>
     <a class="list-group-item" id="emailAddress" type="email" href="mailto:${element.email}?subject=From%20Da%20Team!">Email: ${element.email}</a>
-    <a class="list-group-item" href="https://github.com/${element.school}" target="blank">GitHub: ${element.school}</a>
+    <a class="list-group-item" target="blank">GitHub: ${element.school}</a>
     </ul>        
-    </div>`;
+    </div>
+    </section>`;
   }
   return internCard;
 }
-
-
-
-
-
 
 init();
